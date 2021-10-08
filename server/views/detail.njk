@@ -1,0 +1,171 @@
+{% set title = 'Detail' %}
+
+{% extends "base.njk" %}
+
+{% block content %}
+
+
+
+    <section class="sticky-header">
+        <div class="sticky-header__container max-width padding-side">
+            <div class="sticky-header__container__type">
+                <img src="{{ car.teaserImgUrl }}">
+
+                <div class="sticky-header__container__type__text">
+                    <p>{{ car.name }}</p>
+                    <span></span>
+                    <p>$ {{ car.price }}</p>
+                </div>
+            </div>
+
+            <div class="sticky-header__container__action">
+                <i data-feather="heart" ></i>
+
+                <a href="#configuration" class="btn-pri btn-pri-alt">
+                    <span class="overlay"></span>
+                    <span class="container-text">
+                        <span>Configure</span>
+                    </span>
+                    <img class="arrow" src="/static/images/icons/arrow_right.svg" alt="arrow right">
+                </a>
+            </div>
+        </div> 
+    </section>
+
+    <section class="general">
+            <div class="general__bg padding-side">
+                <div class="max-width general__bg__logo">
+                    <img src="/static/images/detail/{{ car.Brand.name }}.png" alt="Logo of audi">
+                </div>
+            </div>
+
+            <div class="max-width general__car">
+                <img src="/static/images/detail/{{ car.Brand.name }}-head.png" alt="Image of car">
+            </div>
+
+            <div class="max-width general__info padding-side">
+                <div class="general__info__name">
+                    <h1 class="title">{{ car.name }}</h1>
+                </div>
+                
+                <div class="general__info__price">
+                    <p>$ {{ car.price }}</p>
+                </div>
+            </div>
+    </section>
+
+    <section class="specs padding max-width">
+        <h2>Specifations</h2>
+
+        <div class="specs__list">
+            <div class="specs__list__item">
+                <p class="specs__list__item__number">{{ car.acceleration }} s</p>
+                <p class="specs__list__item__info">Acceleration 0-100km/h</p>
+            </div>
+
+            <div class="specs__list__item">
+                <p class="specs__list__item__number">{{ car.topSpeed }} km/h</p>
+                <p class="specs__list__item__info">Top speed</p>
+            </div>
+
+            <div class="specs__list__item">
+                <p class="specs__list__item__number">{{ car.horsePower }} hp</p>
+                <p class="specs__list__item__info">Horsepower</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-info">
+        <div class="specs-info__container max-width">
+            <div class="specs-info__container__img">
+                <img src="/static/images/detail/fuel.jpg" alt="Ambience image of fuel" loading="lazy">
+            </div>
+
+            <div class="specs-info__container__content">
+                <p class="subtitle">Fuel usage</p>
+                <p class="tagline">Go the extra mile</p>
+                <p class="numbers">Average fuel usage: {{ car.fuelConsumption }} l/100km</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-info specs-info--alt">
+        <div class="specs-info__container max-width">
+            <div class="specs-info__container__content">
+                <p class="subtitle">Doors</p>
+                <p class="tagline">Open new doors</p>
+                <p class="numbers">{{ car.doors }} doors</p>
+            </div>
+
+            <div class="specs-info__container__img">
+                <img src="/static/images/detail/doors.png" alt="Ambience image of doors" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-info">
+        <div class="specs-info__container max-width">
+            <div class="specs-info__container__img">
+                <img src="/static/images/detail/brake.jpg" alt="Ambience image of brake" loading="lazy">
+            </div>
+
+            <div class="specs-info__container__content">
+                <p class="subtitle">Braking time</p>
+                <p class="tagline">Take a break</p>
+                <p class="numbers">100 - 0 km/h: {{ car.breakTime }} sec</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-info specs-info--alt">
+        <div class="specs-info__container max-width">
+            <div class="specs-info__container__content">
+                <p class="subtitle">Fuel type</p>
+                <p class="tagline">Feed the beast</p>
+                <p class="numbers">{{ car.fuelType }}</p>
+            </div>
+
+            <div class="specs-info__container__img">
+                <img src="/static/images/detail/fuel-type.jpg" alt="Ambience image of fuel type" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="specs-info">
+        <div class="specs-info__container max-width">
+            <div class="specs-info__container__img">
+                <img src="/static/images/detail/gear.png" alt="Ambience image of gears" loading="lazy">
+            </div>
+
+            <div class="specs-info__container__content">
+                <p class="subtitle">Type of transmission</p>
+                <p class="tagline">Get moving</p>
+                <p class="numbers">{{ 'automatic' if car.isAutomatic else 'manual'}}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews max-width padding">
+        <h2 class="title">Reviews</h2>
+
+        <ul class="reviews__list">
+
+        {% for carreview in carReviews %}
+            <li class="reviews__list__item">
+                <div class="reviews__list__item__top">
+                    <p class="date">{{ carreview.createdAt }}</p>
+                    <p class="rating"><i data-feather="star"></i> {{carreview.rating}}/5</p>
+                </div>
+
+                <p class="text">{{ carreview.description }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </section>
+
+    <section class="configuration max-width padding">
+        <span id="configuration" class="bookmark"></span>
+        <h2 class="title">Configuration</h2>
+    </section>
+
+{% endblock %}
